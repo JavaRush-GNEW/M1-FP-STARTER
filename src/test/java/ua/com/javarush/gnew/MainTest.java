@@ -8,14 +8,18 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MainTest {
-    private static final boolean UKRAINIAN_LANGUAGE_TEST = false;
+
+    private static final boolean UKRAINIAN_LANGUAGE_TEST = true;
     private static final String ENCRYPT_COMMAND = "-e";
     private static final String DECRYPT_COMMAND = "-d";
     private static final String BF_COMMAND = "-bf";
