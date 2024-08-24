@@ -14,21 +14,20 @@ public class Cypher {
         StringBuilder builder = new StringBuilder();
 
         for (char currentChar : chars) {
-            builder.append(processSymbol(currentChar, key));
+            builder.append(ProcessSymbol.processSymbol(currentChar, key));
         }
         return builder.toString();
     }
 
+    public String decrypt(String input, int key) {
+        char[] chars = input.toCharArray();
 
-    private Character processSymbol(char currentChar, int key) {
-        ArrayList<Character> originalAlphabet = LanguageDetector.detector(currentChar);
-        if (originalAlphabet == null){
-            return currentChar;
+        StringBuilder builder = new StringBuilder();
+
+        for (char currentChar : chars) {
+            builder.append(ProcessSymbol.processSymbol(currentChar, key));
         }
-        ArrayList<Character> rotatedAlphabet = new ArrayList<>(originalAlphabet);
-        Collections.rotate(rotatedAlphabet, key);
-        int index =  originalAlphabet.indexOf(currentChar);
-        return rotatedAlphabet.get(index);
+        return builder.toString();
     }
 }
 
