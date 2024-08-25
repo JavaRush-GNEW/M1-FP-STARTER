@@ -1,5 +1,6 @@
 package ua.com.javarush.gnew;
 
+import ua.com.javarush.gnew.crypto.BruteForceResult;
 import ua.com.javarush.gnew.crypto.Cypher;
 import ua.com.javarush.gnew.file.FileManager;
 import ua.com.javarush.gnew.runner.ArgumentsParser;
@@ -30,6 +31,17 @@ public class Main {
                 String decryptedContent = cypher.decrypt(content, runOptions.getKey());
                 String fileName = runOptions.getFilePath().getFileName().toString();
                 String newFileName = fileName.substring(0, fileName.length() - 4) + " [DECRYPTED].txt";
+
+                Path newFilePath = runOptions.getFilePath().resolveSibling(newFileName);
+                fileManager.write(newFilePath, decryptedContent);
+            } else if (runOptions.getCommand() == Command.BRUTEFORCE) {
+
+                String content = fileManager.read(runOptions.getFilePath());
+                BruteForceResult result = cypher.bruteforce(content);
+                String key = result.getKey();
+                String decryptedContent = result.getDecryptedContent();
+                String fileName = runOptions.getFilePath().getFileName().toString();
+                String newFileName = fileName.substring(0, fileName.length() -4) + " [DECRYPRED] " + "Key " + key;
 
                 Path newFilePath = runOptions.getFilePath().resolveSibling(newFileName);
                 fileManager.write(newFilePath, decryptedContent);

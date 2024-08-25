@@ -4,16 +4,7 @@ import java.util.ArrayList;
 
 public class LanguageDetector {
 
-
     public static ArrayList<Character> detector(char content){
-
-//        for (int i = 0; i < content.length(); i++) {
-//            currentChar = content.charAt(i);
-//            if (Character.isLetter(currentChar)){
-//                break;
-//            }
-//        }
-
         if (Language.ALPHABET_ENG.contains(content)) {
             return Language.ALPHABET_ENG;
         } else if (Language.ALPHABET_ENG_UPPER.contains(content)){
@@ -23,10 +14,23 @@ public class LanguageDetector {
         } else if (Language.ALPHABET_UA_UPPER.contains(content)){
             return Language.ALPHABET_UA_UPPER;
         }
-
-//        TO DO: new return
     return null;
     }
 
+    public static ArrayList<String> detector(String content){
 
+        char[] contentCharArray = content.toCharArray();
+
+        for (int i = 0; i < contentCharArray.length; i++) {
+
+            char currentChar = Character.toLowerCase(contentCharArray[i]);
+
+            if (Language.ALPHABET_ENG.contains(currentChar)) {
+                return Language.ENG_WORDS_FOR_BRUTEFORCE;
+            } else if (Language.ALPHABET_UA.contains(currentChar)) {
+                return Language.UKR_WORDS_FOR_BRUTEFORCE;
+            }
+        }
+    return null;
+    }
 }

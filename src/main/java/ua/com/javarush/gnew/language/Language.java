@@ -20,8 +20,10 @@ public class Language {
             'А', 'Б', 'В', 'Г', 'Ґ', 'Д', 'Е', 'Є', 'Ж', 'З', 'И', 'І', 'Ї', 'Й', 'К', 'Л', 'М',
             'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ь', 'Ю', 'Я'));
 
+    public static final ArrayList<String> ENG_WORDS_FOR_BRUTEFORCE = new ArrayList<>(Arrays.asList(
+            "the", "and", "you", "that", "was", "for", "are", "with", "his", "they", "this"));
 
-
-
+    public static final ArrayList<String> UKR_WORDS_FOR_BRUTEFORCE = new ArrayList<>(Arrays.asList(
+            "щоб", "але", "він", "від", "вони", "бути", "його"));
 
 }

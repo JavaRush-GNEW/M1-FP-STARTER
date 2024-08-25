@@ -2,65 +2,51 @@ package ua.com.javarush.gnew.crypto;
 
 import ua.com.javarush.gnew.language.LanguageDetector;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Cypher {
+    private StringBuilder builder = new StringBuilder();
 
-
-    public String encrypt(String input, int key) {
+    public String encrypt(String content, int key) {
         key = Math.negateExact(key);
-        char[] chars = input.toCharArray();
-
-        StringBuilder builder = new StringBuilder();
-
-        for (char currentChar : chars) {
+        char[] contentCharArray = content.toCharArray();
+        for (char currentChar : contentCharArray) {
             builder.append(ProcessSymbol.processSymbol(currentChar, key));
         }
         return builder.toString();
     }
 
-    public String decrypt(String input, int key) {
-        char[] chars = input.toCharArray();
-
-        StringBuilder builder = new StringBuilder();
-
-        for (char currentChar : chars) {
+    public String decrypt(String content, int key) {
+        char[] contentCharArray = content.toCharArray();
+        for (char currentChar : contentCharArray) {
             builder.append(ProcessSymbol.processSymbol(currentChar, key));
         }
         return builder.toString();
+    }
+
+    public BruteForceResult bruteforce(String content){
+        ArrayList<String> wordsForBruteForce = LanguageDetector.detector(content);
+        int initKey = 1;
+
+        while (true) {
+            builder.setLength(0);
+
+            char[] contentCharArray = content.toCharArray();
+            for (char currentChar : contentCharArray) {
+                builder.append(ProcessSymbol.processSymbol(currentChar, initKey));
+            }
+            String decryptedText = builder.toString();
+
+            for (int i = 0; i < wordsForBruteForce.size(); i++) {
+                if (decryptedText.contains(wordsForBruteForce.get(i))) {
+                    String key = String.valueOf(initKey);
+                    return new BruteForceResult(decryptedText, key);
+                }
+            }
+            initKey++;
+        }
     }
 }
 
 
 
 
-// if (!originalAlphabet.contains(currentChar)) {
-//            return currentChar;
-//        }
-
-
-
-//    public String encrypt(String input, int key) {
-//        key = Math.negateExact(key);
-//
-//        originalAlphabet = LanguageDetector.detector(input);
-//        ArrayList<Character> rotatedAlphabet = new ArrayList<>(originalAlphabet);
-//        Collections.rotate(rotatedAlphabet, key);
-//
-//        char[] charArray = input.toCharArray();
-//
-//        StringBuilder builder = new StringBuilder();
-//        for (char symbol : charArray) {
-//            builder.append(processSymbol(symbol, rotatedAlphabet));
-//        }
-//        return builder.toString();
-//    }
-//
-//    private Character processSymbol(char symbol, ArrayList<Character> rotatedAlphabet) {
-//        if (!originalAlphabet.contains(symbol)) {
-//            return symbol;
-//        }
-//        int index = originalAlphabet.indexOf(symbol);
-//
-//        return rotatedAlphabet.get(index);
-//    }
