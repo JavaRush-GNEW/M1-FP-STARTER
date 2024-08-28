@@ -2,6 +2,7 @@ package ua.com.javarush.gnew;
 
 import ua.com.javarush.gnew.crypto.BruteForceResult;
 import ua.com.javarush.gnew.crypto.Cypher;
+import ua.com.javarush.gnew.file.ChangeFileName;
 import ua.com.javarush.gnew.file.FileManager;
 import ua.com.javarush.gnew.runner.ArgumentsParser;
 import ua.com.javarush.gnew.runner.Command;
@@ -10,43 +11,31 @@ import ua.com.javarush.gnew.runner.RunOptions;
 import java.nio.file.Path;
 
 public class Main {
+
+    public static Cypher cypher = new Cypher();
+    public static FileManager fileManager = new FileManager();
+    public static ArgumentsParser argumentsParser = new ArgumentsParser();
+    public static ChangeFileName changeFileName = new ChangeFileName();
+
     public static void main(String[] args) {
-        Cypher cypher = new Cypher();
-        FileManager fileManager = new FileManager();
-        ArgumentsParser argumentsParser = new ArgumentsParser();
         RunOptions runOptions = argumentsParser.parse(args);
+        String content = fileManager.read(runOptions.getFilePath());
 
         try {
             if (runOptions.getCommand() == Command.ENCRYPT) {
-                String content = fileManager.read(runOptions.getFilePath());
-                String encryptedContent = cypher.encrypt(content, runOptions.getKey());
-                String fileName = runOptions.getFilePath().getFileName().toString();
-                String newFileName = fileName.substring(0, fileName.length() - 4) + " [ENCRYPTED].txt";
 
-                Path newFilePath = runOptions.getFilePath().resolveSibling(newFileName);
-                fileManager.write(newFilePath, encryptedContent);
+                Path newFilePath = changeFileName.newFileName(runOptions, "ENCRYPTED");
+                fileManager.write(newFilePath, cypher.encrypt(content, runOptions.getKey()));
             } else if (runOptions.getCommand() == Command.DECRYPT) {
 
-                String content = fileManager.read(runOptions.getFilePath());
-                String decryptedContent = cypher.decrypt(content, runOptions.getKey());
-                String fileName = runOptions.getFilePath().getFileName().toString();
-                String newFileName = fileName.substring(0, fileName.length() - 4) + " [DECRYPTED].txt";
-
-                Path newFilePath = runOptions.getFilePath().resolveSibling(newFileName);
-                fileManager.write(newFilePath, decryptedContent);
+                Path newFilePath = changeFileName.newFileName(runOptions, "DECRYPTED");
+                fileManager.write(newFilePath, cypher.decrypt(content, runOptions.getKey()));
             } else if (runOptions.getCommand() == Command.BRUTEFORCE) {
 
-                String content = fileManager.read(runOptions.getFilePath());
                 BruteForceResult result = cypher.bruteforce(content);
-                String key = result.getKey();
-                String decryptedContent = result.getDecryptedContent();
-                String fileName = runOptions.getFilePath().getFileName().toString();
-                String newFileName = fileName.substring(0, fileName.length() -4) + " [DECRYPRED] " + "Key " + key;
-
-                Path newFilePath = runOptions.getFilePath().resolveSibling(newFileName);
-                fileManager.write(newFilePath, decryptedContent);
+                Path newFilePath = changeFileName.newFileNameWithKey(runOptions, "DECRYPTED", result.getKey());
+                fileManager.write(newFilePath, result.getDecryptedContent());
             }
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
