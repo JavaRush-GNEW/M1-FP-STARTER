@@ -17,14 +17,10 @@ public class LanguageDetector {
     return null;
     }
 
-    public static ArrayList<String> detector(String content){
-
+    public static ArrayList<String> detectorBF(String content){
         char[] contentCharArray = content.toCharArray();
-
         for (int i = 0; i < contentCharArray.length; i++) {
-
             char currentChar = Character.toLowerCase(contentCharArray[i]);
-
             if (Language.ALPHABET_ENG.contains(currentChar)) {
                 return Language.ENG_WORDS_FOR_BRUTEFORCE;
             } else if (Language.ALPHABET_UA.contains(currentChar)) {

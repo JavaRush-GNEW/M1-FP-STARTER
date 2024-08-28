@@ -24,7 +24,7 @@ public class Cypher {
     }
 
     public BruteForceResult bruteforce(String content){
-        ArrayList<String> wordsForBruteForce = LanguageDetector.detector(content);
+        ArrayList<String> wordsForBruteForce = LanguageDetector.detectorBF(content);
         int initKey = 1;
 
         while (true) {
@@ -36,8 +36,8 @@ public class Cypher {
             }
             String decryptedText = builder.toString();
 
-            for (int i = 0; i < wordsForBruteForce.size(); i++) {
-                if (decryptedText.contains(wordsForBruteForce.get(i))) {
+            for (String s : wordsForBruteForce) {
+                if (decryptedText.contains(s)) {
                     String key = String.valueOf(initKey);
                     return new BruteForceResult(decryptedText, key);
                 }
