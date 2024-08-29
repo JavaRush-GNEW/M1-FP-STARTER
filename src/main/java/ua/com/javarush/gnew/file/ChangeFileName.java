@@ -9,14 +9,12 @@ public class ChangeFileName {
     public Path newFileName (RunOptions runOptions, String fileNameEnds){
         String fileName = runOptions.getFilePath().getFileName().toString();
         String newFileName = fileName.substring(0, fileName.length() - 4) + " ["+ fileNameEnds +"].txt";
-        Path newFilePath = runOptions.getFilePath().resolveSibling(newFileName);
-        return newFilePath;
+        return runOptions.getFilePath().resolveSibling(newFileName);
     }
 
     public Path newFileNameWithKey (RunOptions runOptions, String fileNameEnds, String key ){
         String fileName = runOptions.getFilePath().getFileName().toString();
         String newFileName = fileName.substring(0, fileName.length() - 4) + " ["+ fileNameEnds +"] Key " + key +".txt";
-        Path newFilePath = runOptions.getFilePath().resolveSibling(newFileName);
-        return newFilePath;
+        return runOptions.getFilePath().resolveSibling(newFileName);
     }
 }
