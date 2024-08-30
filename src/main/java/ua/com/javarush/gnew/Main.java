@@ -18,7 +18,7 @@ public class Main {
             CryptoOperationHandler handler = new CryptoOperationHandler();
             handler.handleOperation(parser.getMode(), parser.getFilePath(), parser.getKey(), parser.isBruteForce());
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 }

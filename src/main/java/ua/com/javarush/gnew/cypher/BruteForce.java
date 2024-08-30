@@ -54,10 +54,8 @@ public class BruteForce {
             throw new IllegalArgumentException("Path cannot be empty");
         }
         HashMap<Integer,Integer> accuracyMap = new HashMap<>();
-        FileOperations fileOperations = new FileOperations();
         String encryptText = fileOperations.readFromFile(path);
         Alphabet alphabet = new Alphabet(language);
-        CryptoProcessor cryptoProcessor = new CryptoProcessor();
         cryptoProcessor.setAlphabet(alphabet.getAlphabet());
         String decryptText;
         for (int i = 1; i <= 26 ; i++) {
@@ -72,6 +70,7 @@ public class BruteForce {
                 }
             }
         }
+        System.out.println(accuracyMap);
         return getMax(accuracyMap);
     }
 

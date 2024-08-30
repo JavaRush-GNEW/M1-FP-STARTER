@@ -256,9 +256,7 @@ class MainTest {
         void bruteForceEN() {
             Path encryptedFile = execute(ENCRYPT_COMMAND, inputFilePathEN, 5);
             Path bruteForcedFile = execute(BF_COMMAND, encryptedFile, 5);
-
             String bruteForcedText = readFile(bruteForcedFile);
-
             assertEqualsIgnoreCase(HAMLET_EN, bruteForcedText, "Decrypted text is not the same");
         }
 
