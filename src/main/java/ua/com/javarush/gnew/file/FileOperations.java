@@ -29,8 +29,6 @@ public class FileOperations {
         }catch (IOException e){
             e.printStackTrace();
         }
-
-
     }
 
     private String modifyPath(String path, String modificationType){

@@ -24,8 +24,8 @@ public class BruteForce {
 
         // Loading training data depending on selected language
         switch (language) {
-            case UA -> text = readFromResource("/bruteForceUA.txt");
-            case ENG -> text = readFromResource("/bruteForceENG.txt");
+            case UA -> text = readFromResource("bruteForceUA.txt");
+            case ENG -> text = readFromResource("bruteForceENG.txt");
             default -> throw new IllegalStateException("Unexpected value: " + language);
         }
 
@@ -36,7 +36,7 @@ public class BruteForce {
     // Method to read from resources
     private String readFromResource(String resourcePath) {
         StringBuilder result = new StringBuilder();
-        try (InputStream inputStream = getClass().getResourceAsStream(resourcePath);
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(resourcePath);
              BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)))) {
             String line;
             while ((line = reader.readLine()) != null) {
