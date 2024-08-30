@@ -1,33 +1,88 @@
 package ua.com.javarush.gnew.crypto;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import ua.com.javarush.gnew.language.LanguageFactory;
+
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class Cypher {
-    private final ArrayList<Character> originalAlphabet = new ArrayList<>(Arrays.asList('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'));
 
 
-    public String encrypt(String input, int key) {
-        key = Math.negateExact(key);
+    public String decrypt(String text, int shift) {
+        var alphabetLanguage = LanguageFactory.alphabet(text);
+        shift = alphabetLanguage.absKey(shift);
 
-        ArrayList<Character> rotatedAlphabet = new ArrayList<>(originalAlphabet);
-        Collections.rotate(rotatedAlphabet, key);
-        char[] charArray = input.toCharArray();
-
-        StringBuilder builder = new StringBuilder();
-        for (char symbol : charArray) {
-            builder.append(processSymbol(symbol, rotatedAlphabet));
-        }
-        return builder.toString();
+        return encrypt(text, alphabetLanguage.length() - shift); // Для розшифрування використовується зворотний зсув
     }
 
-    private Character processSymbol(char symbol, ArrayList<Character> rotatedAlphabet) {
-        if (!originalAlphabet.contains(symbol)) {
-            return symbol;
-        }
-        int index = originalAlphabet.indexOf(symbol);
+    public String encrypt(String text, int shift) {
+        var alphabetLanguage = LanguageFactory.alphabet(text);
+        shift = alphabetLanguage.absKey(shift);
+        String alphabet = alphabetLanguage.getAlphabet();
 
-        return rotatedAlphabet.get(index);
+        StringBuilder encryptedText = new StringBuilder();
+        int alphabetSize = alphabet.length();
+
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            if (Character.isUpperCase(c)) {
+                int index = alphabet.indexOf(c);
+                if (index != -1) {
+                    char encryptedChar = alphabet.charAt((index + shift) % alphabetSize);
+                    encryptedText.append(encryptedChar);
+                } else {
+                    encryptedText.append(c);
+                }
+            } else if (Character.isLowerCase(c)) {
+                int index = alphabet.toLowerCase().indexOf(c);
+                if (index != -1) {
+                    char encryptedChar = alphabet.toLowerCase().charAt((index + shift) % alphabetSize);
+                    encryptedText.append(encryptedChar);
+                } else {
+                    encryptedText.append(c);
+                }
+            } else {
+                encryptedText.append(c); // Якщо це не буква, просто додаємо символ без змін
+            }
+        }
+        return encryptedText.toString();
     }
+
+    public int analyzeFrequency(String text) {
+        var alphabetLanguage = LanguageFactory.alphabet(text);
+        String alphabet = alphabetLanguage.getAlphabet();
+        var letterFrequency = alphabetLanguage.getLetterFrequency();
+
+        Map<Character, Integer> frequencyMap = new HashMap<>();
+        int alphabetSize = alphabet.length();
+
+        for (char c : text.toUpperCase().toCharArray()) {
+            if (alphabet.indexOf(c) != -1) {
+                frequencyMap.put(c, frequencyMap.getOrDefault(c, 0) + 1);
+            }
+        }
+
+        double minChiSquared = Double.MAX_VALUE;
+        int bestShift = 0;
+
+        for (int shift = 0; shift < alphabetSize; shift++) {
+            double chiSquared = 0.0;
+
+            for (int i = 0; i < alphabetSize; i++) {
+                char decryptedChar = alphabet.charAt((i + shift) % alphabetSize);
+                int observedCount = frequencyMap.getOrDefault(decryptedChar, 0);
+                double expectedCount = text.length() * letterFrequency[i] / 100.0;
+                chiSquared += Math.pow(observedCount - expectedCount, 2) / expectedCount;
+            }
+
+            if (chiSquared < minChiSquared) {
+                minChiSquared = chiSquared;
+                bestShift = shift;
+            }
+        }
+
+        return bestShift;
+    }
+
 }
