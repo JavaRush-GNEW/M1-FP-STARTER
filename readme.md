@@ -4,15 +4,16 @@
 ### Commands:
 
 ```
--e Encrypt
--d Decrypt
--bf Brute force
+  -bf, --brute-force   Brute force
+  -d, DECRYPT              Decrypt
+  -e, ENCRYPT              Encrypt
+  -f, --file=<file>        File path
+  -k, --key=<key>          Key
 ```
 
-### Arguments:
+### Usage:
 ```
--k Key
--f File path
+Usage: <main class> [-de] [-bf] [-f=<file>] [-k=<key>]
 ```
 
 ### Example:
