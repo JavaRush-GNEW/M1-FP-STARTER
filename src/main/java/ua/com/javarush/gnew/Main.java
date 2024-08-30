@@ -1,32 +1,25 @@
 package ua.com.javarush.gnew;
 
-import ua.com.javarush.gnew.crypto.Cypher;
-import ua.com.javarush.gnew.file.FileManager;
-import ua.com.javarush.gnew.runner.ArgumentsParser;
-import ua.com.javarush.gnew.runner.Command;
-import ua.com.javarush.gnew.runner.RunOptions;
+import ua.com.javarush.gnew.processing.ArgumentParser;
+import ua.com.javarush.gnew.processing.CryptoOperationHandler;
 
+import java.io.IOException;
 import java.nio.file.Path;
 
 public class Main {
     public static void main(String[] args) {
-        Cypher cypher = new Cypher();
-        FileManager fileManager = new FileManager();
-        ArgumentsParser argumentsParser = new ArgumentsParser();
-        RunOptions runOptions = argumentsParser.parse(args);
+        if (args.length == 0) {
+            System.out.println("No arguments provided. Use -e for encrypt, -d for decrypt, -k for key, -bf for brute-force, -p for file path.");
+            return;
+        }
 
         try {
-            if (runOptions.getCommand() == Command.ENCRYPT) {
-                String content = fileManager.read(runOptions.getFilePath());
-                String encryptedContent = cypher.encrypt(content, runOptions.getKey());
-                String fileName = runOptions.getFilePath().getFileName().toString();
-                String newFileName = fileName.substring(0, fileName.length() - 4) + " [ENCRYPTED].txt";
-
-                Path newFilePath = runOptions.getFilePath().resolveSibling(newFileName);
-                fileManager.write(newFilePath, encryptedContent);
-            }
+            ArgumentParser parser = new ArgumentParser(args);
+            CryptoOperationHandler handler = new CryptoOperationHandler();
+            handler.handleOperation(parser.getMode(), parser.getFilePath(), parser.getKey(), parser.isBruteForce());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 }
+
