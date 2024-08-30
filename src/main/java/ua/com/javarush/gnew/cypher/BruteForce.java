@@ -4,6 +4,10 @@ import ua.com.javarush.gnew.file.FileOperations;
 import ua.com.javarush.gnew.language.Alphabet;
 import ua.com.javarush.gnew.language.Language;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class BruteForce {
@@ -12,20 +16,36 @@ public class BruteForce {
     private final FileOperations fileOperations;
     private final CryptoProcessor cryptoProcessor;
 
-    public BruteForce(Language language){
+    public BruteForce(Language language) {
         this.fileOperations = new FileOperations();
         this.cryptoProcessor = new CryptoProcessor();
         this.language = language;
         String text;
 
-        // loading train data depends on select language
-        switch (language){
-            case UA -> text = fileOperations.readFromFile("D:\\Web2024\\M1-FP-EUGENE-CYPHER\\src\\test\\resources\\bruteForceUA.txt");
-            case ENG -> text = fileOperations.readFromFile("D:\\Web2024\\M1-FP-EUGENE-CYPHER\\src\\test\\resources\\bruteForceENG.txt");
+        // Loading training data depending on selected language
+        switch (language) {
+            case UA -> text = readFromResource("/bruteForceUA.txt");
+            case ENG -> text = readFromResource("/bruteForceENG.txt");
             default -> throw new IllegalStateException("Unexpected value: " + language);
         }
-        // form the vocabulary
+
+        // Form the vocabulary
         this.dataSet = new HashSet<>(Arrays.asList(text.split("[,\\.\\s]+")));
+    }
+
+    // Method to read from resources
+    private String readFromResource(String resourcePath) {
+        StringBuilder result = new StringBuilder();
+        try (InputStream inputStream = getClass().getResourceAsStream(resourcePath);
+             BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                result.append(line).append("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result.toString();
     }
 
 
