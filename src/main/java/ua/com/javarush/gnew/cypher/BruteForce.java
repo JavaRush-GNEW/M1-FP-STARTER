@@ -70,7 +70,6 @@ public class BruteForce {
                 }
             }
         }
-        System.out.println(accuracyMap);
         return getMax(accuracyMap);
     }
 
