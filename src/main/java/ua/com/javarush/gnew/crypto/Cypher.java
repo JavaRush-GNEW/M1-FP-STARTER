@@ -4,9 +4,9 @@ import ua.com.javarush.gnew.language.LanguageDetector;
 import java.util.ArrayList;
 
 public class Cypher {
-    private StringBuilder builder = new StringBuilder();
 
     public String encrypt(String content, int key) {
+        StringBuilder builder = new StringBuilder();
         key = Math.negateExact(key);
         char[] contentCharArray = content.toCharArray();
         for (char currentChar : contentCharArray) {
@@ -16,6 +16,7 @@ public class Cypher {
     }
 
     public String decrypt(String content, int key) {
+        StringBuilder builder = new StringBuilder();
         char[] contentCharArray = content.toCharArray();
         for (char currentChar : contentCharArray) {
             builder.append(ProcessSymbol.processSymbol(currentChar, key));
@@ -24,6 +25,7 @@ public class Cypher {
     }
 
     public BruteForceResult bruteforce(String content){
+        StringBuilder builder = new StringBuilder();
         ArrayList<String> wordsForBruteForce = LanguageDetector.detectorBF(content);
         int initKey = 1;
 
