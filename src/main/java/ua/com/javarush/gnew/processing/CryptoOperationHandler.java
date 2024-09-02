@@ -13,7 +13,7 @@ public class CryptoOperationHandler {
     private final CryptoProcessor cryptoProcessor = new CryptoProcessor();
     private final FileOperations fileOperations = new FileOperations();
 
-    public void handleOperation(String mode, String filePath, int key, boolean isBruteForce) throws IOException {
+    public void handleOperation(Operation mode, String filePath, int key, boolean isBruteForce) throws IOException {
         if (filePath == null || filePath.isEmpty()) {
             System.out.println("File path is required.");
             return;
@@ -24,7 +24,7 @@ public class CryptoOperationHandler {
     cryptoProcessor.setAlphabet(alphabet.getAlphabet());
 
     switch(mode) {
-        case "encrypt":
+        case ENCRYPT:
             if (key == 0) {
                 System.out.println("Key is required for encryption.");
                 return;
@@ -34,7 +34,7 @@ public class CryptoOperationHandler {
             System.out.println("File encrypted successfully.");
             break;
 
-        case "decrypt":
+        case DECRYPT:
             if (key == 0) {
                 System.out.println("Key is required for decryption.");
                 return;
@@ -44,7 +44,7 @@ public class CryptoOperationHandler {
             System.out.println("File decrypted successfully.");
             break;
 
-        case "bruteforce":
+        case BRUTE_FORCE:
             if (isBruteForce) {
                 BruteForce bruteForce = new BruteForce(Alphabet.detectLanguage(message));
                 int foundKey = bruteForce.getKey(filePath);

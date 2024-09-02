@@ -1,14 +1,16 @@
 package ua.com.javarush.gnew.processing;
 
+import ua.com.javarush.gnew.cypher.Operation;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class ArgumentParser {
-
-
-
-    private final Map<String, String> arguments = new HashMap<>();
+    
     private boolean isBruteForce = false;
+    private Operation mode;
+    private String path;
+    private String key;
 
     public ArgumentParser(String[] args) {
         parseArguments(args);
@@ -18,23 +20,23 @@ public class ArgumentParser {
         for (int i = 0; i < args.length; i++) {
             switch (args[i]) {
                 case "-e":
-                    arguments.put("mode", "encrypt");
+                    this.mode = Operation.ENCRYPT;
                     break;
                 case "-d":
-                    arguments.put("mode", "decrypt");
+                    this.mode = Operation.DECRYPT;
                     break;
                 case "-bf":
                     isBruteForce = true;
-                    arguments.put("mode", "bruteforce");
+                    this.mode = Operation.BRUTE_FORCE;
                     break;
                 case "-k":
                     if (i + 1 < args.length) {
-                        arguments.put("key", args[++i]);
+                        this.key = args[++i];
                     }
                     break;
                 case "-f":
                     if (i + 1 < args.length) {
-                        arguments.put("path", args[++i]);
+                        this.path = args[++i];
                     }
                     break;
                 default:
@@ -43,16 +45,16 @@ public class ArgumentParser {
         }
     }
 
-    public String getMode() {
-        return arguments.get("mode");
+    public Operation getMode() {
+        return mode;
     }
 
     public String getFilePath() {
-        return arguments.get("path");
+        return path;
     }
 
     public int getKey() {
-        return arguments.containsKey("key") ? Integer.parseInt(arguments.get("key")) : 0;
+        return key!= null ? Integer.parseInt((key)) : 0;
     }
 
     public boolean isBruteForce() {
