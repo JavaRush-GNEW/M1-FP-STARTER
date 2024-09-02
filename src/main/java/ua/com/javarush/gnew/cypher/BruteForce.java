@@ -28,7 +28,6 @@ public class BruteForce {
             case ENG -> text = readFromResource("bruteForceENG.txt");
             default -> throw new IllegalStateException("Unexpected value: " + language);
         }
-
         // Form the vocabulary
         this.dataSet = new HashSet<>(Arrays.asList(text.split("[,\\.\\s]+")));
     }
