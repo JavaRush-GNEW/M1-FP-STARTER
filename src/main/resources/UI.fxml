@@ -9,12 +9,12 @@
 <AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#paneMouseClicked" prefHeight="230.0" prefWidth="271.0" style="-fx-background-color: #4b4453;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.com.javarush.gnew.controller.Controller">
    <children>
       <ComboBox fx:id="dropdown" layoutX="22.0" layoutY="32.0" onAction="#methodChoesed" prefWidth="150.0" promptText="Method" style="-fx-background-color: #ff8066;" />
-      <Button fx:id="choesePathButton" layoutX="22.0" layoutY="67.0" mnemonicParsing="false" onAction="#choeseButtonCliced" style="-fx-background-color: #ff8066;" text="ChoesePath" />
-      <Button fx:id="doCypherButton" layoutX="22.0" layoutY="138.0" mnemonicParsing="false" onAction="#doCypher" style="-fx-background-color: #ff8066;" text="DoCypher" />
+      <Button fx:id="choesePathButton" disable="true" layoutX="22.0" layoutY="67.0" mnemonicParsing="false" onAction="#choeseButtonCliced" style="-fx-background-color: #ff8066;" text="ChoesePath" />
+      <Button fx:id="doCypherButton" disable="true" layoutX="22.0" layoutY="138.0" mnemonicParsing="false" onAction="#doCypher" style="-fx-background-color: #ff8066;" text="DoCypher" />
       <Label fx:id="actualPathLabel" layoutX="121.0" layoutY="71.0" prefHeight="17.0" prefWidth="150.0" wrapText="true" />
       <Label fx:id="status" layoutX="111.0" layoutY="142.0" text="Program status" />
       <Label fx:id="newFilePath" layoutX="126.0" layoutY="177.0" text="New path" />
-      <Button fx:id="openNewFileDir" layoutX="23.0" layoutY="173.0" mnemonicParsing="false" onAction="#newFileOpenPath" style="-fx-background-color: #ff8066;" text="Open new file" />
-      <TextField fx:id="inputKey" layoutX="23.0" layoutY="102.0" onKeyPressed="#keyInputSelected" promptText="key" style="-fx-background-color: #ff8066;" />
+      <Button fx:id="openNewFileDir" disable="true" layoutX="23.0" layoutY="173.0" mnemonicParsing="false" onAction="#newFileOpenPath" style="-fx-background-color: #ff8066;" text="Open new file" />
+      <TextField fx:id="inputKey" disable="true" layoutX="23.0" layoutY="102.0" onKeyPressed="#keyInputSelected" promptText="key" style="-fx-background-color: #ff8066;" />
    </children>
 </AnchorPane>
