@@ -1,7 +1,5 @@
 package ua.com.javarush.gnew.crypt.code;
 
-import ua.com.javarush.gnew.Constants.Constants;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
