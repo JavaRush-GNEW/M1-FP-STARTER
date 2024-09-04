@@ -22,6 +22,7 @@ public class ArgumentsParser {
 
                 case "-bf":
                     command = Command.BRUTEFORCE;
+                    key = 0;
                     break;
                 case "-k":
                     if (i + 1 < args.length) {

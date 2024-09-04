@@ -35,18 +35,24 @@ public class Cypher {
     }
 
     public String bruteForce(String text) {
-        // TO DO : brute force in a while loop
-        boolean decrypted = checkForCommonWords(text);
-        return null;
+        String result;
+        for (int i = 1; i < 26; i++) {
+            result = encrypt(text, i);
+            if (checkForCommonWords(result)) {
+                return result;
+            }
+        }
+        return text;
     }
 
     private boolean checkForCommonWords(String text) {
-        boolean containsCommonWords = false;
         ArrayList<String> words = getWords(text);
+        boolean containsCommonWords = false;
 
         for (String word : words) {
             if (Alphabet.ENGLISH_COMMON_WORDS.contains(word.toLowerCase())) {
                 containsCommonWords = true;
+                break;
             }
         }
 

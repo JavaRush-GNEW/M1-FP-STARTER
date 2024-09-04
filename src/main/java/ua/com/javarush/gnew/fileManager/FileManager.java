@@ -24,8 +24,8 @@ public class FileManager {
                 yield " [DECRYPTED].txt";
             case ENCRYPT:
                 yield " [ENCRYPTED].txt";
-            default:
-                yield ".txt";
+            case BRUTEFORCE:
+                yield " [BRUTE_FORCE].txt";
         };
 
         String originalPath = path.toString();

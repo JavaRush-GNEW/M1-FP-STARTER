@@ -33,6 +33,11 @@ public class Main {
                         linesWritten.add(cypher.decrypt(lineRead, runOptions.getKey()));
                     }
                     break;
+                case BRUTEFORCE:
+                    for (String lineRead : linesRead) {
+                        linesWritten.add(cypher.bruteForce(lineRead));
+                    }
+                    break;
             }
 
             Path resultFile = fileManager.getNewPath(runOptions.getFilePath(), runOptions.getCommand());

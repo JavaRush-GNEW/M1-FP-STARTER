@@ -13,11 +13,11 @@ public abstract class Alphabet {
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
             'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'));
     public static final ArrayList<String> ENGLISH_COMMON_WORDS = new ArrayList<>(Arrays.asList(
-            "the", "and", "for", "you", "that", "not", "with", "but", "his", "they",
-            "are", "this", "have", "from", "were", "will", "all", "one", "said", "who",
-            "out", "what", "when", "can", "your", "there", "about", "them", "some", "her",
-            "make", "like", "time", "know", "take", "come", "than", "more", "could", "into",
-            "just", "over", "only", "also", "very", "after", "most", "even", "back", "good", "hello"
+            "the", "be", "to", "of", "and", "in", "that", "have", "for", "not",
+            "with", "he", "as", "you", "do", "this", "but", "his", "by", "from",
+            "they", "we", "say", "her", "she", "or", "will", "my", "one", "all",
+            "would", "there", "their", "what", "so", "up", "out", "if", "about",
+            "who", "get", "which", "go", "me", "it", "can", "has", "had", "are", "hello"
     ));
 
     public static ArrayList<Character> rotateAlphabet(ArrayList<Character> originalAlphabet, int key) {
