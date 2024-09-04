@@ -31,7 +31,6 @@ import static ua.com.javarush.gnew.Constants.Constants.ENG;
                     }
                 }
                 //System.out.println("Key: " + key + " DecryptedText: " + DecryptedText + " Matches: " + matches);
-
                 if (matches > maxMatches) {
                     maxMatches = matches;
                     bestMatch = DecryptedText;

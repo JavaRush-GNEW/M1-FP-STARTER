@@ -14,7 +14,6 @@ import java.nio.file.Path;
 import static ua.com.javarush.gnew.Dictionary.Dictionary.dictionary;
 import static ua.com.javarush.gnew.Dictionary.Dictionary.dictionaryUKR;
 
-
 public class Main {
     public static void main(String[] args) {
         Cryptanalyzer cryptanalyzer = new Cryptanalyzer();
@@ -49,6 +48,7 @@ public class Main {
                 Path newFilePath = runOptions.getFilePath().resolveSibling(newFileName);
                 fileManager.write(newFilePath, encryptedContent);
             }
+
         }catch (Exception e){
             System.out.println("Smth went wrong");
         }

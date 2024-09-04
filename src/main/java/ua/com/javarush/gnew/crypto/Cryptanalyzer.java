@@ -10,7 +10,6 @@ import static ua.com.javarush.gnew.Constants.Constants.UKR;
 
 
 public class Cryptanalyzer {
-
     public  String encryption(String str, int key){
         key = Math.negateExact(key);
         ArrayList<Character> ENG_MOD = new ArrayList<>(ENG);

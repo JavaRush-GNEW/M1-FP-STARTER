@@ -24,6 +24,7 @@ public class ArgumentsParser {
             throw new IllegalArgumentException("Неизвестная команда. Ожидалась команда (e, d, или bf)");
         }
 
+
         if (command == Command.ENCRYPT || command == Command.DECRYPT) {
             System.out.println("Введите ключ для шифрования/дешифрования:");
             key = Integer.parseInt(input.nextLine().trim());
