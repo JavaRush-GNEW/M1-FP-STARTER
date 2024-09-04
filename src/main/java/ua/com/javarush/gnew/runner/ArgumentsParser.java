@@ -58,5 +58,4 @@ public class ArgumentsParser {
 
         return new RunOptions(command, key, filePath);
     }
-
 }
