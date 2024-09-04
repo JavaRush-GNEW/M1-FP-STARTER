@@ -2,8 +2,8 @@ package ua.com.javarush.gnew;
 
 
 
-import ua.com.javarush.gnew.crypto.Cryptanalyzer;
-import ua.com.javarush.gnew.crypto.RunBruteforce;
+import ua.com.javarush.gnew.crypt.code.Cryptanalyzer;
+import ua.com.javarush.gnew.crypt.code.RunBruteforce;
 import ua.com.javarush.gnew.file.FileManager;
 import ua.com.javarush.gnew.runner.ArgumentsParser;
 import ua.com.javarush.gnew.runner.Command;

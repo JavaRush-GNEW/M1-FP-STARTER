@@ -15,10 +15,10 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MainTest {
-    private static final boolean UKRAINIAN_LANGUAGE_TEST = false;
-    private static final String ENCRYPT_COMMAND = "-e";
-    private static final String DECRYPT_COMMAND = "-d";
-    private static final String BF_COMMAND = "-bf";
+    private static final boolean UKRAINIAN_LANGUAGE_TEST = true;
+    private static final String ENCRYPT_COMMAND = "e";
+    private static final String DECRYPT_COMMAND = "d";
+    private static final String BF_COMMAND = "bf";
     private static final String HAMLET_EN = """
             THE TRAGEDY OF HAMLET, PRINCE OF DENMARK
 

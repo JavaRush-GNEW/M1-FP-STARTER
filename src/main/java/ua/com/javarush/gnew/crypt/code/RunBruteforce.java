@@ -1,4 +1,4 @@
-package ua.com.javarush.gnew.crypto;
+package ua.com.javarush.gnew.crypt.code;
 
 import java.util.ArrayList;
 import java.util.Collections;
