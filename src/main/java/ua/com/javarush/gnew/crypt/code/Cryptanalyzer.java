@@ -34,9 +34,7 @@ public class Cryptanalyzer {
             }else{
                 builder.append(symbol);
             }
-
         }
-
         return builder.toString();
     }
     public String decryption(String str, int key) {
@@ -54,7 +52,6 @@ public class Cryptanalyzer {
                 builder.append(encrypted);
                 continue;
             }
-
             int GettingIndex = UKR.indexOf(symbol);
             if (GettingIndex != -1) {
                 Character encrypted = UKR_MOD.get(GettingIndex);
