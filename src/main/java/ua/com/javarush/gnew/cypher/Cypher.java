@@ -33,4 +33,36 @@ public class Cypher {
         // decrypt робить те саме, що й encrypt, тільки з протилежним значенням ключа
         return encrypt(text, -key);
     }
+
+    public String bruteForce(String text) {
+        // TO DO : brute force in a while loop
+        boolean decrypted = checkForCommonWords(text);
+        return null;
+    }
+
+    private boolean checkForCommonWords(String text) {
+        boolean containsCommonWords = false;
+        ArrayList<String> words = getWords(text);
+
+        for (String word : words) {
+            if (Alphabet.ENGLISH_COMMON_WORDS.contains(word.toLowerCase())) {
+                containsCommonWords = true;
+            }
+        }
+
+        return containsCommonWords;
+    }
+
+    private static ArrayList<String> getWords(String text) {
+        String[] words = text.replaceAll("[^a-zA-Z ]", "").split("\\s+");
+
+        ArrayList<String> wordList = new ArrayList<>();
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                wordList.add(word);
+            }
+        }
+
+        return wordList;
+    }
 }
