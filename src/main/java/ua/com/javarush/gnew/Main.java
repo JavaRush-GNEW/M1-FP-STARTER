@@ -2,10 +2,12 @@ package ua.com.javarush.gnew;
 
 import ua.com.javarush.gnew.arg.ArgumentParser;
 import ua.com.javarush.gnew.arg.Arguments;
-import ua.com.javarush.gnew.crypto.BruteForce;
 import ua.com.javarush.gnew.crypto.EncryptionUtil;
 import ua.com.javarush.gnew.file.FileManager;
 import ua.com.javarush.gnew.file.NewFileName;
+import ua.com.javarush.gnew.bruteForce.BruteForce;
+
+import java.util.Scanner;
 
 
 public class Main {
@@ -18,15 +20,16 @@ public class Main {
             String result;
             String newFile;
 
+            EncryptionUtil encryptionUtil = new EncryptionUtil();
             if (arguments.isEncryptionMode()) {
-                result = EncryptionUtil.encrypt(content, arguments.getKey());
+                result = encryptionUtil.encrypt(content, arguments.getKey());
                 newFile = NewFileName.getNewFileName(arguments.getFilePath(), "[ENCRYPTED]");
             } else if (arguments.isDecryptionMode()) {
-                result = EncryptionUtil.decrypt(content, arguments.getKey());
+                result = encryptionUtil.decrypt(content, arguments.getKey());
                 newFile = NewFileName.getNewFileName(arguments.getFilePath(), "[DECRYPTED]");
             } else if (arguments.isBruteForce()) {
-                int key = BruteForce.brute_force(content);
-                result = EncryptionUtil.decrypt(content, key);
+                int key = new BruteForce().brute_force(content);
+                result = encryptionUtil.decrypt(content, key);
                 newFile = NewFileName.getNewFileName(arguments.getFilePath(), "[DECRYPTED]");
                 System.out.println("Key found using brute force: " + key);
             } else {
@@ -37,6 +40,45 @@ public class Main {
             System.out.println("Operation completed successfully. Output file: " + newFile);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        try(Scanner scanner = new Scanner(System.in)) {
+            String string = "";
+            while (!"exit".equals(string)) {
+                System.out.print("Enter command or 'exit' to quit: ");
+                string = scanner.nextLine();
+                if ("exit".equalsIgnoreCase(string)) {
+                    break;
+                }
+                try {
+                    String[] strings = string.split(" ");
+                    Arguments arguments = ArgumentParser.parse(strings);
+
+                    String content = FileManager.read(arguments.getFilePath());
+                    String result;
+                    String newFile;
+
+                    EncryptionUtil encryptionUtil = new EncryptionUtil();
+                    if (arguments.isEncryptionMode()) {
+                        result = encryptionUtil.encrypt(content, arguments.getKey());
+                        newFile = NewFileName.getNewFileName(arguments.getFilePath(), "[ENCRYPTED]");
+                    } else if (arguments.isDecryptionMode()) {
+                        result = encryptionUtil.decrypt(content, arguments.getKey());
+                        newFile = NewFileName.getNewFileName(arguments.getFilePath(), "[DECRYPTED]");
+                    } else if (arguments.isBruteForce()) {
+                        int key = new BruteForce().brute_force(content);
+                        result = encryptionUtil.decrypt(content, key);
+                        newFile = NewFileName.getNewFileName(arguments.getFilePath(), "[DECRYPTED]");
+                        System.out.println("Key found using brute force: " + key);
+                    } else {
+                        throw new IllegalArgumentException("Invalid mode. Use '-e' for encryption, '-d' for decryption, or '-bf' for brute force.");
+                    }
+
+                    FileManager.write(newFile, result);
+                    System.out.println("Operation completed successfully. Output file: " + newFile);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }
