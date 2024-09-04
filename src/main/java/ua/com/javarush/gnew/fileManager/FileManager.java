@@ -13,11 +13,12 @@ public class FileManager {
         return Files.readAllLines(path);
     }
 
-    public void write (Path path, List<String> lines) throws IOException {
+    public void write(Path path, List<String> lines) throws IOException {
         Files.write(path, lines);
     }
 
-    public String getNewPath(String path, Command command) {
+    public Path getNewPath(Path path, Command command) {
+
         String markerOfAction = switch (command) {
             case DECRYPT:
                 yield " [DECRYPTED].txt";
@@ -26,6 +27,10 @@ public class FileManager {
             default:
                 yield ".txt";
         };
-        return path.substring(0, path.length() - 4) + markerOfAction;
+
+        String originalPath = path.toString();
+        String newPath = originalPath.substring(0, originalPath.length() - 4) + markerOfAction;
+
+        return Path.of(newPath);
     }
 }

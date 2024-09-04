@@ -34,7 +34,8 @@ public class Main {
                     }
                     break;
             }
-            Path resultFile = Path.of(fileManager.getNewPath(runOptions.getFilePath().toString(), runOptions.getCommand()));
+
+            Path resultFile = fileManager.getNewPath(runOptions.getFilePath(), runOptions.getCommand());
             if (Files.notExists(resultFile)) {
                 Files.createFile(resultFile);
             }
