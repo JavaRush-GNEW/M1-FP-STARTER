@@ -48,7 +48,6 @@ public class Main {
                 Path newFilePath = runOptions.getFilePath().resolveSibling(newFileName);
                 fileManager.write(newFilePath, encryptedContent);
             }
-
         }catch (Exception e){
             System.out.println("Smth went wrong");
         }
