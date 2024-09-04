@@ -1,62 +1,38 @@
 package ua.com.javarush.gnew.runner;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Scanner;
 
 public class ArgumentsParser {
-    public RunOptions parse(String[] args) {
-        Command command = null;
+    public RunOptions parse() {
+        Scanner input = new Scanner(System.in);
+        Command command;
         Integer key = null;
-        Path filePath = null;
+        Path filePath ;
 
-        for (int i = 0; i < args.length; i++) {
-            String arg = args[i];
+        System.out.println("Введите команду (e - encrypt, d - decrypt, bf - bruteforce):");
+        String commandInput = input.nextLine().trim();
 
-            switch (arg) {
-                case "-e":
-                    command = Command.ENCRYPT;
-                    break;
-
-                case "-d":
-                    command = Command.DECRYPT;
-                    break;
-
-                case "-bf":
-                    command = Command.BRUTEFORCE;
-                    break;
-                case "-k":
-                    if (i + 1 < args.length) {
-                        key = Integer.parseInt(args[++i]);
-                    } else {
-                        throw new IllegalArgumentException("Missing value for key");
-                    }
-                    break;
-
-                case "-f":
-                    if (i + 1 < args.length) {
-                        filePath = Path.of(args[++i]);
-                    } else {
-                        throw new IllegalArgumentException("Missing value for file");
-                    }
-                    break;
-
-                default:
-                    throw new IllegalArgumentException("Unknown argument: " + arg);
-            }
+        if (commandInput.equalsIgnoreCase("e")) {
+            command = Command.ENCRYPT;
+        } else if (commandInput.equalsIgnoreCase("d")) {
+            command = Command.DECRYPT;
+        } else if (commandInput.equalsIgnoreCase("bf")) {
+            command = Command.BRUTEFORCE;
+        } else {
+            throw new IllegalArgumentException("Неизвестная команда. Ожидалась команда (e, d, или bf)");
         }
 
-        if (command == null) {
-            throw new IllegalArgumentException("Command (-e, -d, or -bf) is required");
+        if (command == Command.ENCRYPT || command == Command.DECRYPT) {
+            System.out.println("Введите ключ для шифрования/дешифрования:");
+            key = Integer.parseInt(input.nextLine().trim());
         }
 
-        if (key == null) {
-            throw new IllegalArgumentException("Key is required for encrypt or decrypt mode");
-        }
-
-        if (filePath == null) {
-            throw new IllegalArgumentException("File path is required");
-        }
+        System.out.println("Введите путь к файлу:");
+        String filePathInput = input.nextLine().trim();
+        filePath = Paths.get(filePathInput);
 
         return new RunOptions(command, key, filePath);
     }
-
 }

@@ -5,11 +5,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class FileManager {
-    public String read(Path filePath) throws IOException {
-        return Files.readString(filePath);
+    public String read(Path FilePath) throws IOException{
+        return Files.readString(FilePath);
     }
-
-    public void write(Path filePath, String content) throws IOException {
-        Files.writeString(filePath, content);
+    public void write(Path FilePath, String content) throws IOException{
+        Files.writeString(FilePath,content);
     }
 }
