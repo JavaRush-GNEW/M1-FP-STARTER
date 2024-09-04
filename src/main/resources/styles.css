@@ -1,0 +1,58 @@
+.button{
+        -fx-background-color : #7289DA;
+        -fx-text-fill : #FFFFFF;
+        -fx-background-radius : 8px;
+        -fx-border-color: transparent;
+        -fx-border-width: 1px;
+        -fx-border-radius: 8px;
+}
+
+.button:hover{
+         -fx-border-color: white;
+}
+
+.background {
+        -fx-background-color : #36393F;
+}
+
+.combo-box {
+        -fx-background-color : #7289DA;
+        -fx-background-radius : 8px;
+        -fx-border-color: transparent;
+        -fx-border-width: 1px;
+        -fx-border-radius: 8px;
+}
+.combo-box:hover {
+        -fx-border-color: white;
+}
+
+.combo-box .list-cell {
+        -fx-text-fill : #FFFFFF;
+}
+
+.combo-box .list-view .list-cell {
+        -fx-background-color : #7289DA;
+}
+
+.combo-box .list-view .list-cell:hover {
+        -fx-background-color : #5F73B0;
+}
+
+.input {
+        -fx-prompt-text-fill: #FFFFFF;
+        -fx-background-color : #7289DA;
+        -fx-text-fill : #FFFFFF;
+        -fx-background-radius : 8px;
+        -fx-border-color: transparent;
+        -fx-border-width: 1px;
+        -fx-border-radius: 8px;
+}
+
+.input:hover {
+        -fx-border-color: white;
+}
+
+.label {
+        -fx-text-fill : #FFFFFF;
+        -fx-background-radius : 8px;
+}

@@ -172,6 +172,7 @@ public class Controller implements Initializable {
 
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Текстовые файлы", "*.txt"));
         fileChooser.setInitialDirectory(new File("C:\\Users\\evgen\\Desktop"));
+
     }
 }
 

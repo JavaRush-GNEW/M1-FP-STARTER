@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#paneMouseClicked" prefHeight="230.0" prefWidth="271.0" style="-fx-background-color: #4b4453;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.com.javarush.gnew.controller.Controller">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#paneMouseClicked" prefHeight="169.0" prefWidth="309.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.com.javarush.gnew.controller.Controller">
    <children>
-      <ComboBox fx:id="dropdown" layoutX="22.0" layoutY="32.0" onAction="#methodChoesed" prefWidth="150.0" promptText="Method" style="-fx-background-color: #ff8066;" />
-      <Button fx:id="choesePathButton" disable="true" layoutX="22.0" layoutY="67.0" mnemonicParsing="false" onAction="#choeseButtonCliced" style="-fx-background-color: #ff8066;" text="ChoesePath" />
-      <Button fx:id="doCypherButton" disable="true" layoutX="22.0" layoutY="138.0" mnemonicParsing="false" onAction="#doCypher" style="-fx-background-color: #ff8066;" text="DoCypher" />
-      <Label fx:id="actualPathLabel" layoutX="121.0" layoutY="71.0" prefHeight="17.0" prefWidth="150.0" wrapText="true" />
-      <Label fx:id="status" layoutX="111.0" layoutY="142.0" text="Program status" />
-      <Label fx:id="newFilePath" layoutX="126.0" layoutY="177.0" text="New path" />
-      <Button fx:id="openNewFileDir" disable="true" layoutX="23.0" layoutY="173.0" mnemonicParsing="false" onAction="#newFileOpenPath" style="-fx-background-color: #ff8066;" text="Open new file" />
-      <TextField fx:id="inputKey" disable="true" layoutX="23.0" layoutY="102.0" onKeyPressed="#keyInputSelected" promptText="key" style="-fx-background-color: #ff8066;" />
+      <ComboBox fx:id="dropdown" layoutX="23.0" layoutY="25.0" onAction="#methodChoesed" prefWidth="150.0" promptText="Method" stylesheets="@styles.css" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="20.0" />
+      <Button fx:id="choesePathButton" disable="true" layoutX="24.0" layoutY="53.0" mnemonicParsing="false" onAction="#choeseButtonCliced" stylesheets="@styles.css" text="ChoesePath" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="54.0" />
+      <Button fx:id="doCypherButton" disable="true" layoutX="16.0" layoutY="106.0" mnemonicParsing="false" onAction="#doCypher" stylesheets="@styles.css" text="DoCipher" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="88.0" />
+      <Label fx:id="actualPathLabel" layoutX="112.0" layoutY="60.0" prefHeight="17.0" prefWidth="173.0" stylesheets="@styles.css" wrapText="true" />
+      <Label fx:id="status" layoutX="117.0" layoutY="95.0" stylesheets="@styles.css" text="Program status" />
+      <Label fx:id="newFilePath" layoutX="155.0" layoutY="129.0" stylesheets="@styles.css" text="New path" />
+      <Button fx:id="openNewFileDir" disable="true" layoutX="17.0" layoutY="144.0" mnemonicParsing="false" onAction="#newFileOpenPath" stylesheets="@styles.css" text="Open new file path" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="122.0" />
+      <TextField fx:id="inputKey" disable="true" layoutX="194.0" layoutY="22.0" onKeyPressed="#keyInputSelected" prefHeight="25.0" prefWidth="86.0" promptText="Key" styleClass="input" stylesheets="@styles.css" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="20.0" />
    </children>
+   <styleClass>
+      <String fx:value="background" />
+      <String fx:value="list-view" />
+   </styleClass>
 </AnchorPane>
