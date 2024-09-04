@@ -112,7 +112,7 @@ class MainTest {
 
     private Path execute(String command, Path inputFilePath, int key) {
         List<Path> filesBefore = listFiles(tempDir);
-        List<String> params = List.of(command, "-k", String.valueOf(key), "-f", inputFilePath.toString());
+        List<String> params = List.of(command, "k", String.valueOf(key), "f", inputFilePath.toString());
 
         try {
             Main.main(params.toArray(new String[0]));
@@ -343,7 +343,7 @@ class MainTest {
         void fileNotExists() {
             Path fakeFilePath = Path.of("/fake/path/file.txt");
 
-            String[] params = {ENCRYPT_COMMAND, "-f", fakeFilePath.toString(), "-k", "5"};
+            String[] params = {ENCRYPT_COMMAND, "f", fakeFilePath.toString(), "k", "5"};
 
             assertDoesNotThrow(() -> Main.main(params), "Exception was thrown while processing a non-existent file path.");
         }
