@@ -1,8 +1,22 @@
+### Notes:
+- This Cypher can ENCRYPT or DECRYPT your sentences. 
+- You can found correct texts or sentences by using this program.
+- You can decrypt or encrypt text by using CESAR CYPHER.
+- Support for UKRAINIAN and ENGLISH languages in encryption, decryption, and also in brute force
+
+### Last Upgrades:
+- We have an automatic program that can obtain decrypted text without a key.
+- The program now takes into account spaces in the specified parameters.
+- Some bug fixed.
+
+### Brute force
+- Сan automatically decrypt any text (Caesar cipher) and find the correct key.
+
 ### Commands:
 
-- e Encrypt
-- d Decrypt
-- bf Brute force
+- -e Encrypt
+- -d Decrypt
+- -bf Brute force
 
 ### Arguments:
 
@@ -11,7 +25,7 @@
 
 ### Example:
 
-- e 1 "/path/to/file.txt" - Encrypt file with key 1
-- d 5 "/path/to/file [ENCRYPTED].txt" - Decrypt file with key 5
-- bf "/path/to/file [ENCRYPTED].txt" - Brute force decrypt file
+- -e -k 1 -f "/path/to/file.txt" - Encrypt file with key 1
+- -d -k 5 -f "/path/to/file [ENCRYPTED].txt" - Decrypt file with key 5
+- -bf -f "/path/to/file [ENCRYPTED].txt" - Brute force decrypt file
 

@@ -20,7 +20,7 @@ public class Main {
         RunBruteforce runBruteforce = new RunBruteforce();
         FileManager fileManager = new FileManager();
         ArgumentsParser argumentsParser = new ArgumentsParser();
-        RunOptions runOptions = argumentsParser.parse();
+        RunOptions runOptions = argumentsParser.parse(args);
         try {
             if (runOptions.getCommand() == Command.ENCRYPT) {
                 String content = fileManager.read(runOptions.getFilePath());
