@@ -7,8 +7,7 @@ import ua.com.javarush.gnew.runner.RunOptions;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -34,8 +33,9 @@ public class Main {
                     }
                     break;
                 case BRUTEFORCE:
+                    int key = cypher.calculateKey(linesRead);
                     for (String lineRead : linesRead) {
-                        linesWritten.add(cypher.bruteForce(lineRead));
+                        linesWritten.add(cypher.decrypt(lineRead, key));
                     }
                     break;
             }

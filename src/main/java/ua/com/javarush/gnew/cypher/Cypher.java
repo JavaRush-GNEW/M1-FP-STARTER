@@ -3,6 +3,7 @@ package ua.com.javarush.gnew.cypher;
 import ua.com.javarush.gnew.language.Alphabet;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Cypher {
 
@@ -34,15 +35,35 @@ public class Cypher {
         return encrypt(text, -key);
     }
 
-    public String bruteForce(String text) {
-        String result;
-        for (int i = 1; i < 26; i++) {
-            result = encrypt(text, i);
-            if (checkForCommonWords(result)) {
-                return result;
+    public int calculateKey(List<String> text) {
+        String encrypted = "";
+        String decrypted = "";
+
+        for (String line : text) {
+            encrypted = line;
+            for (int i = 1; i < 26; i++) {
+                decrypted = decrypt(line, i);
+                if (checkForCommonWords(decrypted)) {
+                    break;
+                }
+            }
+            break;
+        }
+
+        int firstLetterIndex = 0;
+        for (int i = 0; i < decrypted.length(); i++) {
+            if (Character.isLetter(decrypted.charAt(i))) {
+                firstLetterIndex = i;
+                break;
             }
         }
-        return text;
+
+        int indexEncrypted = Alphabet.ENGLISH_LOWERCASE.indexOf(Character.toLowerCase(encrypted.charAt(firstLetterIndex)));
+        int indexDecrypted = Alphabet.ENGLISH_LOWERCASE.indexOf(Character.toLowerCase(decrypted.charAt(firstLetterIndex)));
+        if (indexEncrypted < indexDecrypted) {
+            indexEncrypted = indexEncrypted + 26;
+        }
+        return indexEncrypted - indexDecrypted;
     }
 
     private boolean checkForCommonWords(String text) {
