@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 public class EncryptionUtil {
 
-    public static String encrypt(String input, int key) {
+    public String encrypt(String input, int key) {
         StringBuilder builder = new StringBuilder();
         for (char symbol : input.toCharArray()) {
-            ArrayList<Character> alphabet = Language.getAlphabet(symbol);
+            ArrayList<Character> alphabet = new Language().getAlphabet(symbol);
             if (alphabet != null) {
                 builder.append(newChar(alphabet, key, symbol));
             } else {
@@ -19,7 +19,7 @@ public class EncryptionUtil {
         return builder.toString();
     }
 
-    public static String decrypt(String input, int key) {
+    public String decrypt(String input, int key) {
         return encrypt(input, -key);
     }
 

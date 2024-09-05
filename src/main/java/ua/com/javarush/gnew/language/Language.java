@@ -19,7 +19,7 @@ public class Language {
     public static final ArrayList<Character> UKR_ALP = new ArrayList<>(Arrays.asList(
             'а', 'б', 'в', 'г', 'ґ', 'д', 'е', 'є', 'ж', 'з', 'и', 'і', 'ї', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ь', 'ю', 'я'
     ));
-    public static ArrayList<Character> getAlphabet(char symbol) {
+    public ArrayList<Character> getAlphabet(char symbol) {
         if (CON_ALP.contains(symbol) || ALP.contains(symbol)) {
             return CON_ALP.contains(symbol) ? CON_ALP : ALP;
         } else if (UKR_CON_ALP.contains(symbol) || UKR_ALP.contains(symbol)) {
