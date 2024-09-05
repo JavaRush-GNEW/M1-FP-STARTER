@@ -16,12 +16,8 @@ public class Cypher {
     }
 
     public String decrypt(String content, int key) {
-        StringBuilder builder = new StringBuilder();
-        char[] contentCharArray = content.toCharArray();
-        for (char currentChar : contentCharArray) {
-            builder.append(ProcessSymbol.processSymbol(currentChar, key));
-        }
-        return builder.toString();
+        key = Math.negateExact(key);
+        return encrypt(content, key);
     }
 
     public BruteForceResult bruteforce(String content){
@@ -31,13 +27,11 @@ public class Cypher {
 
         while (true) {
             builder.setLength(0);
-
             char[] contentCharArray = content.toCharArray();
             for (char currentChar : contentCharArray) {
                 builder.append(ProcessSymbol.processSymbol(currentChar, initKey));
             }
             String decryptedText = builder.toString();
-
             for (String s : wordsForBruteForce) {
                 if (decryptedText.contains(s)) {
                     String key = String.valueOf(initKey);
