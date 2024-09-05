@@ -24,13 +24,18 @@ public class FileManager {
                 yield " [DECRYPTED].txt";
             case ENCRYPT:
                 yield " [ENCRYPTED].txt";
-            case BRUTEFORCE:
-                yield " [BRUTE_FORCE].txt";
+            default:
+                yield ".txt";
         };
 
         String originalPath = path.toString();
         String newPath = originalPath.substring(0, originalPath.length() - 4) + markerOfAction;
+        return Path.of(newPath);
+    }
 
+    public Path getNewPath(Path path, int key) {
+        String originalPath = path.toString();
+        String newPath = originalPath.substring(0, originalPath.length() - 4) + " [BRUTE_FORCE] " + key + ".txt";
         return Path.of(newPath);
     }
 }

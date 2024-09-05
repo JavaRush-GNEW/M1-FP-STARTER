@@ -18,6 +18,7 @@ public class Main {
 
         List<String> linesRead;
         List<String> linesWritten = new ArrayList<>();
+        Path resultFile = null;
 
         try {
             linesRead = fileManager.read(runOptions.getFilePath());
@@ -26,21 +27,23 @@ public class Main {
                     for (String lineRead : linesRead) {
                         linesWritten.add(cypher.encrypt(lineRead, runOptions.getKey()));
                     }
+                    resultFile = fileManager.getNewPath(runOptions.getFilePath(), runOptions.getCommand());
                     break;
                 case DECRYPT:
                     for (String lineRead : linesRead) {
                         linesWritten.add(cypher.decrypt(lineRead, runOptions.getKey()));
                     }
+                    resultFile = fileManager.getNewPath(runOptions.getFilePath(), runOptions.getCommand());
                     break;
                 case BRUTEFORCE:
                     int key = cypher.calculateKey(linesRead);
                     for (String lineRead : linesRead) {
                         linesWritten.add(cypher.decrypt(lineRead, key));
                     }
+                    resultFile = fileManager.getNewPath(runOptions.getFilePath(), key);
                     break;
             }
 
-            Path resultFile = fileManager.getNewPath(runOptions.getFilePath(), runOptions.getCommand());
             if (Files.notExists(resultFile)) {
                 Files.createFile(resultFile);
             }
