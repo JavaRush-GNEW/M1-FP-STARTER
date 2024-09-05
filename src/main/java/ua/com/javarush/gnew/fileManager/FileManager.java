@@ -14,13 +14,11 @@ public class FileManager {
     }
 
     public void write(Path path, List<String> lines) throws IOException {
-        for (String line : lines) {
-            Files.writeString(path, line);
-        }
+        String content = String.join("\n", lines);
+        Files.writeString(path, content);
     }
 
     public Path getNewPath(Path path, Command command) {
-
         String markerOfAction = switch (command) {
             case DECRYPT:
                 yield " [DECRYPTED].txt";

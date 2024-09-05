@@ -22,29 +22,31 @@
 -bf -f "/path/to/file [ENCRYPTED].txt" - Brute force decrypt file
 ```
 
-### Argument could be in any order
+### Arguments could be in any order
 ```
 -e -f "/path/to/file.txt" -k 1
 ```
 
 ## About the project
 
-### Implemented
+### Implemented tasks
+All mandatory tasks are completed.
 - Program compiled in jar format and released on GitHub.
 - Program can be run from the console by passing arguments.
 - Program implements three options: [ENCRYPT, DECRYPT, BRUTE_FORCE].
 - Program implements only one option at a time.
-- Program writes the result into a new file, which name contains a label according to command used.
+- If you use Encrypt or Decrypt command, key value is mandatory.
+- Program writes the result into a new file, which name contains
+a label according to command used: [ENCRYPTED], [DECRYPTED],
+[BRUTE_FORCE]. In case of using Bruteforce, the calculated key value
+is appended to the file name as well.
 - Program can be used English language only.
-- Only letters of the latin alphabet are encrypted.
-- After decryption, the text *mostly* has the same formatting as the original file (spaces, indents, symbols, upper and lower case letters).
+- Only letters of latin alphabet are encrypted.
+- After decryption, the text has exactly the same formatting as the original file
+- (spaces, indents, line separators, symbols, upper and lower case letters).
 
-### Not implemented
+### Not implemented tasks
 - Program does not work for Ukrainian or any other languages.
-- Program does not encode any symbols except latin letters.
+- Program does not encode any special or blank symbols (latin letters only).
+- Program does not work with CLI.
 - Program does not have UI.
-- 2 tests failed: After decryption, the line separators are different from the originals.
-- Code simplicity: Cypher.calculateKey() method has over 20 lines. 
-### Extra
-After hours of troubleshooting, I have not found a way to correctly convey the line separators into the output file.
-The issue is most likely in the FileManager.write() method. Any feedback appreciated. :)

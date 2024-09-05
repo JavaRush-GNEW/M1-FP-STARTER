@@ -36,7 +36,7 @@ public class Main {
                     resultFile = fileManager.getNewPath(runOptions.getFilePath(), runOptions.getCommand());
                     break;
                 case BRUTEFORCE:
-                    int key = cypher.calculateKey(linesRead);
+                    int key = cypher.bruteForceKey(linesRead);
                     for (String lineRead : linesRead) {
                         linesWritten.add(cypher.decrypt(lineRead, key));
                     }

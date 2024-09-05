@@ -35,13 +35,13 @@ public class Cypher {
         return encrypt(text, -key);
     }
 
-    public int calculateKey(List<String> text) {
+    public int bruteForceKey(List<String> text) {
         String encrypted = "";
         String decrypted = "";
 
         for (String line : text) {
             encrypted = line;
-            for (int i = 1; i < 26; i++) {
+            for (int i = 0; i < 26; i++) {
                 decrypted = decrypt(line, i);
                 if (checkForCommonWords(decrypted)) {
                     break;
@@ -50,6 +50,10 @@ public class Cypher {
             break;
         }
 
+        return calculateKey(encrypted, decrypted);
+    }
+
+    private int calculateKey(String encrypted, String decrypted) {
         int firstLetterIndex = 0;
         for (int i = 0; i < decrypted.length(); i++) {
             if (Character.isLetter(decrypted.charAt(i))) {
@@ -60,6 +64,7 @@ public class Cypher {
 
         int indexEncrypted = Alphabet.ENGLISH_LOWERCASE.indexOf(Character.toLowerCase(encrypted.charAt(firstLetterIndex)));
         int indexDecrypted = Alphabet.ENGLISH_LOWERCASE.indexOf(Character.toLowerCase(decrypted.charAt(firstLetterIndex)));
+
         if (indexEncrypted < indexDecrypted) {
             indexEncrypted = indexEncrypted + 26;
         }
