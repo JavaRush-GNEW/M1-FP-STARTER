@@ -14,7 +14,9 @@ public class FileManager {
     }
 
     public void write(Path path, List<String> lines) throws IOException {
-        Files.write(path, lines);
+        for (String str : lines) {
+            Files.writeString(path, str);
+        }
     }
 
     public Path getNewPath(Path path, Command command) {
