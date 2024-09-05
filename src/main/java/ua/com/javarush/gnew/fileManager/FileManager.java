@@ -2,8 +2,6 @@ package ua.com.javarush.gnew.fileManager;
 
 import ua.com.javarush.gnew.runner.Command;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,13 +14,8 @@ public class FileManager {
     }
 
     public void write(Path path, List<String> lines) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path.toString()))) {
-            for (int i = 0; i < lines.size(); i++) {
-                writer.write(lines.get(i));
-                if (i < lines.size() - 1) {
-                    writer.newLine();
-                }
-            }
+        for (String line : lines) {
+            Files.writeString(path, line);
         }
     }
 
