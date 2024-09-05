@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MainTest {
-    private static final boolean UKRAINIAN_LANGUAGE_TEST = false;
+    private static final boolean UKRAINIAN_LANGUAGE_TEST = true;
     private static final String ENCRYPT_COMMAND = "-e";
     private static final String DECRYPT_COMMAND = "-d";
     private static final String BF_COMMAND = "-bf";
@@ -256,9 +256,7 @@ class MainTest {
         void bruteForceEN() {
             Path encryptedFile = execute(ENCRYPT_COMMAND, inputFilePathEN, 5);
             Path bruteForcedFile = execute(BF_COMMAND, encryptedFile, 5);
-
             String bruteForcedText = readFile(bruteForcedFile);
-
             assertEqualsIgnoreCase(HAMLET_EN, bruteForcedText, "Decrypted text is not the same");
         }
 
