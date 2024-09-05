@@ -80,7 +80,7 @@ public class Cypher {
         return containsCommonWords;
     }
 
-    private static ArrayList<String> getWords(String text) {
+    private ArrayList<String> getWords(String text) {
         String[] words = text.replaceAll("[^a-zA-Z ]", "").split("\\s+");
 
         ArrayList<String> wordList = new ArrayList<>();
