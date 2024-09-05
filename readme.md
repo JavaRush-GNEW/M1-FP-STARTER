@@ -32,7 +32,7 @@
 ### Implemented
 - Program compiled in jar format and released on GitHub.
 - Program can be run from the console by passing arguments.
-- Program implements has three options: [ENCRYPT, DECRYPT, BRUTE_FORCE].
+- Program implements three options: [ENCRYPT, DECRYPT, BRUTE_FORCE].
 - Program implements only one option at a time.
 - Program writes the result into a new file, which name contains a label according to command used.
 - Program can be used English language only.
