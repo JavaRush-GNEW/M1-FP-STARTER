@@ -4,11 +4,13 @@ public class Arguments {
     private final String mode;
     private final String filePath;
     private final int key;
+    private final String frequencyAnalysisFilePath;
 
-    public Arguments(String mode, String filePath, int key) {
+    public Arguments(String mode, String filePath, int key, String frequencyAnalysisFilePath) {
         this.mode = mode;
         this.filePath = filePath;
         this.key = key;
+        this.frequencyAnalysisFilePath = frequencyAnalysisFilePath;
     }
 
     public String getMode() {
@@ -22,6 +24,9 @@ public class Arguments {
     public int getKey() {
         return key;
     }
+    public String getFrequencyAnalysisFilePath() {
+        return frequencyAnalysisFilePath;
+    }
 
     public boolean isEncryptionMode() {
         return "-e".equals(mode);
@@ -33,6 +38,9 @@ public class Arguments {
 
     public boolean isBruteForce() {
         return "-bf".equals(mode);
+    }
+    public boolean hasFrequencyAnalysisFile() {
+        return frequencyAnalysisFilePath != null;
     }
 }
 
