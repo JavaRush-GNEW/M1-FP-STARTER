@@ -3,18 +3,19 @@ package ua.com.javarush.gnew.runner;
 import ua.com.javarush.gnew.arg.ArgumentParser;
 import ua.com.javarush.gnew.arg.Arguments;
 import ua.com.javarush.gnew.bruteForce.BruteForce;
+import ua.com.javarush.gnew.bruteForce.FrequencyAnalysis;
 import ua.com.javarush.gnew.crypto.EncryptionUtil;
 import ua.com.javarush.gnew.file.FileManager;
 import ua.com.javarush.gnew.file.NewFileName;
 
 import java.util.Scanner;
 
-public class Runner {
-    private static Runner runner;
-    private Runner(){}
-    public static Runner getRunner(){
+public class CipherApplication {
+    private static CipherApplication runner;
+    private CipherApplication(){}
+    public static CipherApplication getInstance(){
         if (runner == null){
-            runner = new Runner();
+            runner = new CipherApplication();
         }
         return runner;
     }
@@ -34,11 +35,21 @@ public class Runner {
                 result = encryptionUtil.decrypt(content, arguments.getKey());
                 newFile = NewFileName.getNewFileName(arguments.getFilePath(), "[DECRYPTED]");
             } else if (arguments.isBruteForce()) {
-                int key = new BruteForce().brute_force(content);
-                result = encryptionUtil.decrypt(content, key);
-                newFile = NewFileName.getNewFileName(arguments.getFilePath(), "[DECRYPTED]");
-                System.out.println("Key found using brute force: " + key);
-            } else {
+                if (arguments.hasFrequencyAnalysisFile()) {
+                    String referenceContent = FileManager.read(arguments.getFrequencyAnalysisFilePath());
+                    FrequencyAnalysis frequencyAnalysis = new FrequencyAnalysis();
+                    result = frequencyAnalysis.analysis(content, referenceContent);
+                    int foundKey = frequencyAnalysis.getKey_bf();
+                    newFile = NewFileName.getNewFileName(arguments.getFilePath(), "[DECRYPTED_KEY_" + foundKey + "]");
+                    System.out.println("Key found using frequency analysis: " + foundKey);
+                } else {
+                    // Стандартний brute force
+                    int key = new BruteForce().brute_force(content);
+                    result = encryptionUtil.decrypt(content, key);
+                    newFile = NewFileName.getNewFileName(arguments.getFilePath(), "[DECRYPTED]");
+                    System.out.println("Key found using brute force: " + key);
+                }
+            }else {
                 throw new IllegalArgumentException("Invalid mode. Use '-e' for encryption, '-d' for decryption, or '-bf' for brute force.");
             }
 
@@ -48,7 +59,7 @@ public class Runner {
             e.printStackTrace();
         }
     }
-    public void runWithConsol(){
+    public void runInteractive(){
         try(Scanner scanner = new Scanner(System.in)) {
             String string = "";
             while (!"exit".equals(string)) {
