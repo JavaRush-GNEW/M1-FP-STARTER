@@ -6,6 +6,7 @@ public class ArgumentParser {
         String mode = null;
         String file = null;
         int key = 0;
+        String frequencyAnalysisFile = null;
 
         for (int i = 0; i < args.length; i++) {
             switch (args[i]) {
@@ -24,6 +25,9 @@ public class ArgumentParser {
                 case "-f":
                     file = args[++i];
                     break;
+                case "-fa":
+                    frequencyAnalysisFile = args[++i];
+                    break;
                 default:
                     throw new IllegalArgumentException("Unknown argument: " + args[i]);
             }
@@ -33,6 +37,6 @@ public class ArgumentParser {
             throw new IllegalArgumentException("File or mode not specified. Use '-e' for encryption, '-d' for decryption, or '-bf' for brute force.");
         }
 
-        return new Arguments(mode, file, key);
+        return new Arguments(mode, file, key, frequencyAnalysisFile);
     }
 }
