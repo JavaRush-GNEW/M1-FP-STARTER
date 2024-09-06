@@ -1,14 +1,15 @@
 package ua.com.javarush.gnew;
 
 
-import ua.com.javarush.gnew.runner.Runner;
+import ua.com.javarush.gnew.runner.CipherApplication;
 
 
 
 public class Main {
 
     public static void main(String[] args) {
-        Runner.getRunner().run(args);
-        Runner.getRunner().runWithConsol();
+        CipherApplication app = CipherApplication.getInstance();
+        app.run(args);
+        app.runInteractive();
     }
 }
