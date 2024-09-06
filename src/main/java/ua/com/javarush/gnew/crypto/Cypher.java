@@ -1,33 +1,48 @@
 package ua.com.javarush.gnew.crypto;
 
+import ua.com.javarush.gnew.language.LanguageDetector;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 public class Cypher {
-    private final ArrayList<Character> originalAlphabet = new ArrayList<>(Arrays.asList('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'));
 
-
-    public String encrypt(String input, int key) {
-        key = Math.negateExact(key);
-
-        ArrayList<Character> rotatedAlphabet = new ArrayList<>(originalAlphabet);
-        Collections.rotate(rotatedAlphabet, key);
-        char[] charArray = input.toCharArray();
-
+    public String encrypt(String content, int key) {
         StringBuilder builder = new StringBuilder();
-        for (char symbol : charArray) {
-            builder.append(processSymbol(symbol, rotatedAlphabet));
+        key = Math.negateExact(key);
+        char[] contentCharArray = content.toCharArray();
+        for (char currentChar : contentCharArray) {
+            builder.append(ProcessSymbol.processSymbol(currentChar, key));
         }
         return builder.toString();
     }
 
-    private Character processSymbol(char symbol, ArrayList<Character> rotatedAlphabet) {
-        if (!originalAlphabet.contains(symbol)) {
-            return symbol;
-        }
-        int index = originalAlphabet.indexOf(symbol);
+    public String decrypt(String content, int key) {
+        key = Math.negateExact(key);
+        return encrypt(content, key);
+    }
 
-        return rotatedAlphabet.get(index);
+    public BruteForceResult bruteforce(String content){
+        StringBuilder builder = new StringBuilder();
+        ArrayList<String> wordsForBruteForce = LanguageDetector.detectorBF(content);
+        int initKey = 1;
+
+        while (true) {
+            builder.setLength(0);
+            char[] contentCharArray = content.toCharArray();
+            for (char currentChar : contentCharArray) {
+                builder.append(ProcessSymbol.processSymbol(currentChar, initKey));
+            }
+            String decryptedText = builder.toString();
+            for (String s : wordsForBruteForce) {
+                if (decryptedText.contains(s)) {
+                    String key = String.valueOf(initKey);
+                    return new BruteForceResult(decryptedText, key);
+                }
+            }
+            initKey++;
+        }
     }
 }
+
+
+
+
