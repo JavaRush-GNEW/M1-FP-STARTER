@@ -19,7 +19,6 @@ public class ArgumentsParser {
             } else if (arg.equalsIgnoreCase("-bf")) {
                 command = Command.BRUTEFORCE;
             } else if (arg.equalsIgnoreCase("-k")){
-                //throw new IllegalArgumentException("Command (e, d, or bf) is required");
                 if (i + 1 < args.length) {
                     key = Integer.parseInt(args[++i]);
                 } else {
