@@ -12,8 +12,9 @@ Instead, a graphical user interface (GUI) was implemented.
 ```
 ### Project Features
 ```
-- **Multilingual Support**: The program supports encryption and decryption of text in English and Ukrainian. 
-It automatically detects the language of the text and selects the appropriate alphabet.
+- Multilingual Support: The program supports:
+Encryption and decryption of text in English and Ukrainian. 
+Automatically detects the language of the text and selects the appropriate alphabet.
 
 - Brute-force Implementation: A brute-force mode is available for decrypting encrypted text.
 
