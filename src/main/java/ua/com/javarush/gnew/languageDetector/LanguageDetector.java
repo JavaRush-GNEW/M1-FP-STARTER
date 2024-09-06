@@ -1,6 +1,12 @@
 package ua.com.javarush.gnew.languageDetector;
 
+import java.util.List;
+import java.util.Set;
+
 public interface LanguageDetector {
-    boolean isLanguage(String text);
+    Set<String> getCommonWords();
+    List<String> getCommonEndings();
+    List<String> getRareCombinations();
+    int getAlphabetSize();
 }
 
