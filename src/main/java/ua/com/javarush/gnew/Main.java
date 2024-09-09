@@ -1,32 +1,39 @@
 package ua.com.javarush.gnew;
 
-import ua.com.javarush.gnew.crypto.Cypher;
+import ua.com.javarush.gnew.crypto.Cryptor;
+import ua.com.javarush.gnew.crypto.KeyManager;
 import ua.com.javarush.gnew.file.FileManager;
+import ua.com.javarush.gnew.file.NewFileNamePath;
 import ua.com.javarush.gnew.runner.ArgumentsParser;
 import ua.com.javarush.gnew.runner.Command;
 import ua.com.javarush.gnew.runner.RunOptions;
 
-import java.nio.file.Path;
-
 public class Main {
     public static void main(String[] args) {
-        Cypher cypher = new Cypher();
         FileManager fileManager = new FileManager();
         ArgumentsParser argumentsParser = new ArgumentsParser();
         RunOptions runOptions = argumentsParser.parse(args);
+        KeyManager keyManager = new KeyManager();
 
         try {
-            if (runOptions.getCommand() == Command.ENCRYPT) {
-                String content = fileManager.read(runOptions.getFilePath());
-                String encryptedContent = cypher.encrypt(content, runOptions.getKey());
-                String fileName = runOptions.getFilePath().getFileName().toString();
-                String newFileName = fileName.substring(0, fileName.length() - 4) + " [ENCRYPTED].txt";
-
-                Path newFilePath = runOptions.getFilePath().resolveSibling(newFileName);
-                fileManager.write(newFilePath, encryptedContent);
+            String content = fileManager.read(runOptions.getFilePath());
+            Cryptor cryptor;
+            if(runOptions.getCommand() == Command.ENCRYPT || runOptions.getCommand() == Command.DECRYPT){
+                int key = keyManager.getKey(runOptions);
+                cryptor = new Cryptor(content, key);
+                String cryptoContent = cryptor.cypher();
+                NewFileNamePath path = new NewFileNamePath();
+                fileManager.write(path.newPath(runOptions) , cryptoContent);
+            } else if (runOptions.getCommand() == Command.BRUTEFORCE) {
+                cryptor = new Cryptor(content, keyManager.keySelection(runOptions));
+                String cryptoContent = cryptor.cypher();
+                NewFileNamePath path = new NewFileNamePath();
+                fileManager.write(path.newPath(runOptions) , cryptoContent);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
+
     }
 }
