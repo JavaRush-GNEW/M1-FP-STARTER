@@ -29,4 +29,4 @@
 -e -f "/path/to/file.txt" -k 1
 ```
 ### P.S.
-To run from the GUI, do not specify any parameters
+To run from the GUI, do not specify any parameters (Чомусь коли я видаляв класи вони не видалялись на GitHab, довелось чистити кеш Git та відновляти інформацію з останнього коміту, поідеї такої проблеми вже не має бути)
