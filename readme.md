@@ -50,3 +50,4 @@ is appended to the file name as well.
 - Program does not encode any special or blank symbols (latin letters only).
 - Program does not work with CLI.
 - Program does not have UI.
+
