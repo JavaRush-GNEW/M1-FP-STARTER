@@ -28,3 +28,5 @@
 ```
 -e -f "/path/to/file.txt" -k 1
 ```
+### P.S.
+To run from the GUI, do not specify any parameters
