@@ -22,6 +22,7 @@ public class ArgumentsParser {
 
                 case "-bf":
                     command = Command.BRUTEFORCE;
+                    key = 0;
                     break;
                 case "-k":
                     if (i + 1 < args.length) {
@@ -58,5 +59,4 @@ public class ArgumentsParser {
 
         return new RunOptions(command, key, filePath);
     }
-
 }
