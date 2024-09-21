@@ -1,21 +1,23 @@
 package ua.com.javarush.gnew.crypt.code;
 
+import ua.com.javarush.gnew.Constants.Constants;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static ua.com.javarush.gnew.Constants.Constants.*;
 
 
 public class Cryptanalyzer {
     public String encryption(String str, int key) {
+        Constants constants = new Constants();
         key = Math.negateExact(key);
-        ArrayList<Character> ENG_LOWER_MOD = new ArrayList<>(ENG_LOWER);
-        ArrayList<Character> UKR_LOWER_MOD = new ArrayList<>(UKR_LOWER);
+        ArrayList<Character> ENG_LOWER_MOD = new ArrayList<>(constants.getEngLower());
+        ArrayList<Character> UKR_LOWER_MOD = new ArrayList<>(constants.getUkrLower());
         Collections.rotate(ENG_LOWER_MOD, key);
         Collections.rotate(UKR_LOWER_MOD, key);
 
-        ArrayList<Character> ENG_UPPER_MOD = new ArrayList<>(ENG_UPPER);
-        ArrayList<Character> UKR_UPPER_MOD = new ArrayList<>(UKR_UPPER);
+        ArrayList<Character> ENG_UPPER_MOD = new ArrayList<>(constants.getEngUpper());
+        ArrayList<Character> UKR_UPPER_MOD = new ArrayList<>(constants.getUkrUpper());
         Collections.rotate(ENG_UPPER_MOD, key);
         Collections.rotate(UKR_UPPER_MOD, key);
 
@@ -24,14 +26,14 @@ public class Cryptanalyzer {
 
         for (char symbol : array) {
             if (Character.isLowerCase(symbol)) {
-                int originalIndex = ENG_LOWER.indexOf(symbol);
+                int originalIndex = constants.getEngLower().indexOf(symbol);
                 if (originalIndex != -1) {
                     Character encrypted = ENG_LOWER_MOD.get(originalIndex);
                     builder.append(encrypted);
                     continue;
                 }
 
-                originalIndex = UKR_LOWER.indexOf(symbol);
+                originalIndex = constants.getUkrLower().indexOf(symbol);
                 if (originalIndex != -1) {
                     Character encrypted = UKR_LOWER_MOD.get(originalIndex);
                     builder.append(encrypted);
@@ -40,14 +42,14 @@ public class Cryptanalyzer {
                 }
             }
             else if (Character.isUpperCase(symbol)) {
-                int originalIndex = ENG_UPPER.indexOf(symbol);
+                int originalIndex = constants.getEngUpper().indexOf(symbol);
                 if (originalIndex != -1) {
                     Character encrypted = ENG_UPPER_MOD.get(originalIndex);
                     builder.append(encrypted);
                     continue;
                 }
 
-                originalIndex = UKR_UPPER.indexOf(symbol);
+                originalIndex = constants.getUkrUpper().indexOf(symbol);
                 if (originalIndex != -1) {
                     Character encrypted = UKR_UPPER_MOD.get(originalIndex);
                     builder.append(encrypted);
