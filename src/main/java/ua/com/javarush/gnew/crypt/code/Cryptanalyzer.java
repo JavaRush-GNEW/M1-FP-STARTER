@@ -66,4 +66,8 @@ public class Cryptanalyzer {
         builder = new StringBuilder(encryption(str, -key));
         return builder.toString();
     }
+
+    public String getDecryption(String str, int key){
+        return decryption(str,key);
+    }
 }

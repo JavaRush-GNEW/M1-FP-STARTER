@@ -43,7 +43,7 @@ public class Main {
                 String encryptedContent = runBruteforce.bruteforce(content,dictionary, dictionaryUKR);
                 String fileName = runOptions.getFilePath().getFileName().toString();
                 String key = runBruteforce.getKey(content, dictionary, dictionaryUKR).replace("Key: ", "");
-                String newFileName = fileName.substring(0, fileName.length() - 4) + " [DECRYPTED Key -" + key+ "].txt";
+                String newFileName = fileName.substring(0, fileName.length() - 4) + " [DECRYPTED Key -" + key + "].txt";
 
                 Path newFilePath = runOptions.getFilePath().resolveSibling(newFileName);
                 fileManager.write(newFilePath, encryptedContent);
