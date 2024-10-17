@@ -48,7 +48,7 @@ public class ArgumentsParser {
             throw new IllegalArgumentException("Command (-e, -d, or -bf) is required");
         }
 
-        if (key == null) {
+        if (key == null && command!=Command.BRUTEFORCE) {
             throw new IllegalArgumentException("Key is required for encrypt or decrypt mode");
         }
 
