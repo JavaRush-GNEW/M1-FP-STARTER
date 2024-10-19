@@ -1,32 +1,18 @@
 package ua.com.javarush.gnew;
 
-import ua.com.javarush.gnew.crypto.Cypher;
-import ua.com.javarush.gnew.file.FileManager;
-import ua.com.javarush.gnew.runner.ArgumentsParser;
-import ua.com.javarush.gnew.runner.Command;
-import ua.com.javarush.gnew.runner.RunOptions;
 
-import java.nio.file.Path;
+import ua.com.javarush.gnew.runner.CipherApplication;
+
 
 public class Main {
+
     public static void main(String[] args) {
-        Cypher cypher = new Cypher();
-        FileManager fileManager = new FileManager();
-        ArgumentsParser argumentsParser = new ArgumentsParser();
-        RunOptions runOptions = argumentsParser.parse(args);
-
-        try {
-            if (runOptions.getCommand() == Command.ENCRYPT) {
-                String content = fileManager.read(runOptions.getFilePath());
-                String encryptedContent = cypher.encrypt(content, runOptions.getKey());
-                String fileName = runOptions.getFilePath().getFileName().toString();
-                String newFileName = fileName.substring(0, fileName.length() - 4) + " [ENCRYPTED].txt";
-
-                Path newFilePath = runOptions.getFilePath().resolveSibling(newFileName);
-                fileManager.write(newFilePath, encryptedContent);
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+//        if (args.length == 0) {
+//            JavaFXApp.launchApp(args);//Графічний інтерфес
+//        } else {
+        CipherApplication app = CipherApplication.getInstance();
+        app.run(args);
+//            app.runInteractive();//Відповідає за консоль
+//        }
     }
 }
