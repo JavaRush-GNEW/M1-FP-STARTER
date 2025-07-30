@@ -1,4 +1,7 @@
-package ua.com.javarush.gnew.runner;
+package ua.com.javarush.gnew.service;
+
+import ua.com.javarush.gnew.runner.Command;
+import ua.com.javarush.gnew.runner.RunOptions;
 
 import java.nio.file.Path;
 
@@ -48,7 +51,7 @@ public class ArgumentsParser {
             throw new IllegalArgumentException("Command (-e, -d, or -bf) is required");
         }
 
-        if (key == null) {
+        if ((command == Command.ENCRYPT || command == Command.DECRYPT) & key == null) {
             throw new IllegalArgumentException("Key is required for encrypt or decrypt mode");
         }
 

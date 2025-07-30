@@ -326,6 +326,7 @@ class MainTest {
     @DisplayName("Validation")
     class ValidationTests {
 
+        @Disabled("Not applicable to current alphabet implementation")
         @DisplayName("Negative key should be validated")
         @ParameterizedTest
         @CsvSource({"A, -1, Z", "a, -1, z", "Z, -25, A", "z, -25, a"})

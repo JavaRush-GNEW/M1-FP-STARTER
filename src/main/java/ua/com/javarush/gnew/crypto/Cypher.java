@@ -1,33 +1,49 @@
 package ua.com.javarush.gnew.crypto;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import ua.com.javarush.gnew.language.Language;
+import ua.com.javarush.gnew.service.TextAnalyzer;
 
 public class Cypher {
-    private final ArrayList<Character> originalAlphabet = new ArrayList<>(Arrays.asList('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'));
+    private static final TextAnalyzer TEXT_ANALYZER = new TextAnalyzer();
+    private final Language language;
 
-
-    public String encrypt(String input, int key) {
-        key = Math.negateExact(key);
-
-        ArrayList<Character> rotatedAlphabet = new ArrayList<>(originalAlphabet);
-        Collections.rotate(rotatedAlphabet, key);
-        char[] charArray = input.toCharArray();
-
-        StringBuilder builder = new StringBuilder();
-        for (char symbol : charArray) {
-            builder.append(processSymbol(symbol, rotatedAlphabet));
-        }
-        return builder.toString();
+    public Cypher(Language language) {
+        this.language = language;
     }
 
-    private Character processSymbol(char symbol, ArrayList<Character> rotatedAlphabet) {
-        if (!originalAlphabet.contains(symbol)) {
-            return symbol;
-        }
-        int index = originalAlphabet.indexOf(symbol);
+    public String encrypt(String text, int key) {
+        return shiftText(text, key);
+    }
 
-        return rotatedAlphabet.get(index);
+    public String decrypt(String text, int key) {
+        return shiftText(text, -key);
+    }
+
+    private String shiftText(String text, int key) {
+        StringBuilder result = new StringBuilder();
+        for (char symbol : text.toCharArray()) {
+            if (language.contains(symbol)) {
+                int index = language.indexOf(symbol);
+                int shiftedIndex = (index + key + language.size()) % language.size();
+                result.append(language.get(shiftedIndex));
+            } else {
+                result.append(symbol);
+            }
+        }
+        return result.toString();
+    }
+
+    public String bruteForce(String encryptedText) {
+        String bestGuess = "";
+        int bestScore = Integer.MIN_VALUE;
+        for (int key = 1; key < language.size(); key++) {
+            String decrypted = decrypt(encryptedText, key);
+            int score = TEXT_ANALYZER.evaluate(decrypted);
+            if (score > bestScore) {
+                bestScore = score;
+                bestGuess = decrypted;
+            }
+        }
+        return bestGuess;
     }
 }
